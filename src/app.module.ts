@@ -13,10 +13,10 @@ import { AuthModule } from './auth/auth.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'password',
-      database: 'review_db',
+      password: '1234',
+      database: 'review',
       entities: [Feedback, Admin],
-      synchronize: true, // Turn off in production
+      synchronize: true,
     }),
     FeedbackModule,
     AdminModule,
