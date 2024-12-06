@@ -13,17 +13,20 @@ export class AdminController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(
+    @Param('id') id: string) {
     return this.adminService.findOne(+id); // Use `+id` to convert the string to a number
   }
 
   @Post()
-  async createAdmin(@Body() createAdminDto: CreateAdminDto) {
+  async createAdmin(
+    @Body() createAdminDto: CreateAdminDto) {
     return this.adminService.create(createAdminDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(
+    @Param('id') id: string) {
     return this.adminService.remove(+id); 
   }
 
