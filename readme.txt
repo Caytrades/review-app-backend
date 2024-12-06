@@ -18,3 +18,10 @@ Nest CLI for Admin
 nest generate module auth
 nest generate service auth
 nest generate controller auth
+
+
+How to Kill Port 3306
+netstat -aon | findstr :3306
+tasklist | findstr <PID>
+taskkill /PID 4212 /F
+
