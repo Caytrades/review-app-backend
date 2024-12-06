@@ -10,12 +10,12 @@ export class FeedbackService {
     private feedbackRepository: Repository<Feedback>,
   ) {}
 
-  async create(message: string): Promise<Feedback> {
+  async create(message: string) {
     const feedback = this.feedbackRepository.create({ message });
     return this.feedbackRepository.save(feedback);
   }
 
-  async findAll(): Promise<Feedback[]> {
+  async findAll() {
     return this.feedbackRepository.find();
   }
 }

@@ -2,7 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Admin } from './admin.entity';
-import { CreateAdminDto } from './dto/create-admin';
+import { CreateAdminDto } from './dto/create-admin.dto';
+import { UpdateAdminDto } from './dto/update-admin.dto';
 
 @Injectable()
 export class AdminService {
@@ -11,11 +12,11 @@ export class AdminService {
     private readonly adminRepository: Repository<Admin>,
   ) {}
 
-  async findAll(): Promise<Admin[]> {
+  async findAll() {
     return await this.adminRepository.find();
   }
 
-  async findOne(id: number): Promise<Admin> {
+  async findOne(id: number) {
     const admin = await this.adminRepository.findOneBy({ id });
     if (!admin) {
       throw new NotFoundException(`Admin with ID ${id} not found`);
@@ -23,8 +24,29 @@ export class AdminService {
     return admin;
   }
 
-  async create(createAdminDto: CreateAdminDto): Promise<Admin> {
+  async create(createAdminDto: CreateAdminDto) {
     const newAdmin = this.adminRepository.create(createAdminDto);
     return await this.adminRepository.save(newAdmin);
+  }
+
+  async remove(id: number) {
+    const admin = await this.adminRepository.findOneBy({ id });
+    if (!admin) {
+      throw new NotFoundException(`Admin with ID ${id} not found`);
+    }
+    await this.adminRepository.delete(id);
+    return `Admin with ID ${id} has been deleted successfully`;
+  }
+
+  async update(id: number, updateAdminDto: UpdateAdminDto) {
+    const admin = await this.adminRepository.findOneBy({ id });
+    if (!admin) {
+      throw new NotFoundException(`Admin with ID ${id} not found`);
+    }
+
+    // Update the admin's fields
+    const updatedAdmin = Object.assign(admin, updateAdminDto);
+    await this.adminRepository.save(updatedAdmin);
+    return `Admin with ID ${id} has been updated successfully`;
   }
 }

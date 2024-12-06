@@ -1,7 +1,7 @@
-import { CreateAdmin } from './create-admin';
+import { CreateAdminDto } from './create-admin.dto';
 
 describe('CreateAdmin', () => {
   it('should be defined', () => {
-    expect(new CreateAdmin()).toBeDefined();
+    expect(new CreateAdminDto()).toBeDefined();
   });
 });
