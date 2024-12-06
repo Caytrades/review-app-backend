@@ -49,4 +49,8 @@ export class AdminService {
     await this.adminRepository.save(updatedAdmin);
     return `Admin with ID ${id} has been updated successfully`;
   }
+
+  async findByUsername(username: string): Promise<Admin | undefined> {
+    return this.adminRepository.findOne({ where: { username } });
+  }
 }
