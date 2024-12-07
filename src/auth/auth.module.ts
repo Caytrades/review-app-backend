@@ -5,12 +5,15 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AdminModule } from '../admin/admin.module';
+import * as dotenv from 'dotenv';
+
+dotenv.config()
 
 @Module({
   imports: [
     PassportModule,
     JwtModule.register({
-      secret: 'your-secret-key',
+      secret: process.env.SECRET_KEY,
       signOptions: { expiresIn: '1h' }, // Token expiry
     }),
     AdminModule, 
