@@ -14,15 +14,6 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  // async signup(signupDto: SignupDto) {
-  //   const { username, password } = signupDto;
-  //   const hashedPassword = await bcrypt.hash(password, 10);
-  //   return this.adminService.create({
-  //     username,
-  //     password: hashedPassword,
-  //   });
-  // }
-
   async signup(signupDto: SignupDto) {
     const { username, password } = signupDto;
 
@@ -52,5 +43,16 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload, { expiresIn: '1h' }),
     };
+
+
+    // async signup(signupDto: SignupDto) {
+    //   const { username, password } = signupDto;
+    //   const hashedPassword = await bcrypt.hash(password, 10);
+    //   return this.adminService.create({
+    //     username,
+    //     password: hashedPassword,
+    //   });
+    // }
+
   }
 }
